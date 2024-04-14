@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  bu530restair:
+    image: bu530restair
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5002:5002

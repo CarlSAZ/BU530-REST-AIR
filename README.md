@@ -9,4 +9,15 @@ The code here aims to implement a REST API interface for a robotic airship. With
 This project suggests the use of the REDIS docker containers to run a database.
 
 Use the following to launch the redis stack server container (which includes the timeseries module)
+
 docker run -p 6379:6379 -it --rm redis/redis-stack-server
+
+## How to start flask server
+
+To run the flask application without using docker, navigate to the root folder of the repo and run
+
+flask run
+
+## Accessing the OpenAPI documentation
+
+Once the application is running, the endpoint of /docs will provide an interactive documentation of the various HTTP methods and input/output schemas

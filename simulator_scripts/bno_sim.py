@@ -87,8 +87,8 @@ if __name__ == "__main__":
             value = ts.mget(["imu_id=2"])
             print(type(value))
             print(value[0]['sensor:imu:accel_x'])
-            tmp = ChainMap(*value)
+            tmp = ChainMap(*ts.mget(["imu_id=2"]))
             
-            print(tmp[0][2])
-            print(tmp)
+            print(tmp['sensor:imu:accel_x'][2])
+            print(dict(tmp))
 

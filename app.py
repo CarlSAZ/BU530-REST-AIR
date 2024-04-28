@@ -9,6 +9,12 @@ auth = HTTPBasicAuth()
 rdb = redis.Redis(host='localhost',port=6379 ,db=1)
 ts = rdb.ts()
 
+@auth.verify_password
+def verify_password(username,password):
+    '''TBD: Better define authentication'''
+    if(username=='admin' and password=='tacocat'):
+        return username
+
 @app.get('/')
 def index():
     return {'message': 'hello human! This is a flying airship!'}
@@ -30,6 +36,11 @@ def get_latest_imu():
     print(result)
     return result
 
+
+@app.route('/killswitch',methods=['GET','POST','PUT'])
+@app.auth_required(auth)
+def send_killswitch_sig():
+    return {'message':'sent killswitch signal. '}
 
 if __name__ == "__main__":
     temp = ts.get("sensor:bno:mag_x")

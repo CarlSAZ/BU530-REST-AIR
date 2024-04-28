@@ -6,7 +6,7 @@ import Sensors.bno_imu as bno_imu
 app = APIFlask(__name__)
 auth = HTTPBasicAuth()
 
-rdb = redis.Redis(host='localhost',port=6379 ,db=1)
+rdb = redis.Redis(host='airship-server',port=6379 ,db=1)
 ts = rdb.ts()
 
 @auth.verify_password
@@ -47,4 +47,3 @@ if __name__ == "__main__":
     print(repr(temp))
     temp = ts.info("sensor:bno:mag_x")
     print(bno_imu.load_latest_imu(ts))
-    pass

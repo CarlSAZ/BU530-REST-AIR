@@ -14,34 +14,34 @@ def create_database(r:redis.Redis):
         command = "ts.alter"
     pipe = r.pipeline()
     pipe.execute_command(command,"sensor:imu:accel_x",
-                            "LABELS","imu_id", "2", "accel", "x")
+                            "LABELS","sensor", "imu","type", "accel","unit","m/s/s","component", "x")
     pipe.execute_command(command,"sensor:imu:accel_y",
-                            "LABELS","imu_id", "2", "accel", "y")
+                            "LABELS","sensor", "imu","type", "accel","unit","m/s/s","component", "y")
     pipe.execute_command(command,"sensor:imu:accel_z",
-                            "LABELS","imu_id", "2", "accel", "z")
+                            "LABELS","sensor", "imu","type", "accel","unit","m/s/s","component", "z")
     
     pipe.execute_command(command,"sensor:imu:gyro_x",
-                            "LABELS","imu_id", "2", "gyro","x")
+                            "LABELS","sensor", "imu","type", "gyro","unit","rad","component","x")
     pipe.execute_command(command,"sensor:imu:gyro_y",
-                            "LABELS","imu_id", "2", "gyro","y")
+                            "LABELS","sensor", "imu","type", "gyro","unit","rad","component","y")
     pipe.execute_command(command,"sensor:imu:gyro_z",
-                            "LABELS","imu_id", "2", "gyro","z")
+                            "LABELS","sensor", "imu","type", "gyro","unit","rad","component","z")
     
     pipe.execute_command(command,"sensor:imu:quat_r",
-                            "LABELS","imu_id", "2", "quat","r")
+                            "LABELS","sensor", "imu","type", "quat","unit","none","component","r")
     pipe.execute_command(command,"sensor:imu:quat_i",
-                            "LABELS","imu_id", "2", "quat","i")
+                            "LABELS","sensor", "imu","type", "quat","unit","none","component","i")
     pipe.execute_command(command,"sensor:imu:quat_j",
-                            "LABELS","imu_id", "2", "quat","j")
+                            "LABELS","sensor", "imu","type", "quat","unit","none","component","j")
     pipe.execute_command(command,"sensor:imu:quat_k",
-                            "LABELS","imu_id", "2", "quat","k")
+                            "LABELS","sensor", "imu","type", "quat","unit","none","component","k")
 
     pipe.execute_command(command,"sensor:imu:magn_x",
-                            "LABELS","imu_id", "2", "magn","x")
+                            "LABELS","sensor", "imu","type", "magn","unit","rad","component","x")
     pipe.execute_command(command,"sensor:imu:magn_y",
-                            "LABELS","imu_id", "2", "magn","y")
+                            "LABELS","sensor", "imu","type", "magn","unit","rad","component","y")
     pipe.execute_command(command,"sensor:imu:magn_z",
-                            "LABELS","imu_id", "2", "magn","z")
+                            "LABELS","sensor", "imu","type", "magn","unit","rad","component","z")
     print(pipe.execute())
     print("Adjusted keys?")
     return
@@ -81,13 +81,13 @@ if __name__ == "__main__":
             # Extra debugging to test commands
             value = ts.get("sensor:imu:accel_x")
             print("Got accel_x: " + repr(value))
-            value = ts.get("sensor:imu:mag_z")
+            value = ts.get("sensor:imu:magn_z")
             print("Got mag_z: " + repr(value))
             print(r.exists("sensor"))
-            value = ts.mget(["imu_id=2"])
+            value = ts.mget(["sensor=imu"])
             print(type(value))
             print(value[0]['sensor:imu:accel_x'])
-            tmp = ChainMap(*ts.mget(["imu_id=2"]))
+            tmp = ChainMap(*ts.mget(["sensor=imu"]))
             
             print(tmp['sensor:imu:accel_x'][2])
             print(dict(tmp))

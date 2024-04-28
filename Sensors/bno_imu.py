@@ -34,4 +34,4 @@ class imu_output(Schema):
     
 
 def load_latest_imu(tsdb:redis.commands.timeseries.TimeSeries):
-    return ChainMap(*tsdb.mget(["imu_id=2"],select_labels=returned_labels))
+    return ChainMap(*tsdb.mget(["sensor=imu"],select_labels=returned_labels))

@@ -13,7 +13,8 @@ def create_app(configObject='config.DevConfig'):
     
     with app.app_context():
         # Include routes if any
+        from . import routes
 
         # Register blueprints
-
+        app.register_blueprint(routes.landing)
         return app

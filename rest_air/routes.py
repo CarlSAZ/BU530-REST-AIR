@@ -1,13 +1,9 @@
 '''This is a basic template for an API App that works with pytest'''
-import redis
 from apiflask import APIFlask, HTTPBasicAuth
 import Sensors.bno_imu as bno_imu
 
-app = APIFlask(__name__)
 auth = HTTPBasicAuth()
-
-rdb = redis.Redis(host='airship-server',port=6379 ,db=1)
-ts = rdb.ts()
+    
 
 @auth.verify_password
 def verify_password(username,password):
@@ -36,14 +32,19 @@ def get_latest_imu():
     print(result)
     return result
 
+@app.get('/sensors/imu/timerange/<int:time1>-<int:time2>')
+@app.output(bno_imu.imu_output)
+def get_imu_timerange(time1,time2):
+    '''Returns the sensor data from the BNO imu between time1 and time2
+        - acceleration
+        - gyro
+        - quaternion
+        - magnetic compass'''
+    #result = bno_imu.get_imu_timerange(ts,time1,time2)
+    return 'Timerange not implemented yet. Requested time [{time1} - {time2}]', 501
+
 
 @app.route('/killswitch',methods=['GET','POST','PUT'])
 @app.auth_required(auth)
 def send_killswitch_sig():
     return {'message':'sent killswitch signal. '}
-
-if __name__ == "__main__":
-    temp = ts.get("sensor:bno:mag_x")
-    print(repr(temp))
-    temp = ts.info("sensor:bno:mag_x")
-    print(bno_imu.load_latest_imu(ts))

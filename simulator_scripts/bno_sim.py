@@ -48,7 +48,7 @@ def create_database(r:redis.Redis):
 
 
 if __name__ == "__main__":
-    with redis.Redis(host='localhost',port=6379 ,db=1) as r:
+    with redis.Redis(host='localhost',port=6379 ,db=0) as r:
         ts = r.ts()
         create_database(r)
 

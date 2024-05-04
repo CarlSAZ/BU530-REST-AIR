@@ -1,9 +1,13 @@
 '''Unit tests for the basic app module that uses flask_restful'''
-import logging
-import tracemalloc
-import pytest
+import sys
+import os
+current = os.path.dirname(os.path.realpath(__file__))
+parent = os.path.dirname(current)
+sys.path.append(parent)
 
-import bno_imu
+import logging
+import pytest
+import app as app_module
 
 log = logging.getLogger('Test.bno_imu')
 
@@ -20,8 +24,7 @@ log = logging.getLogger('Test.bno_imu')
 def fixture_app():
     '''Initializes the app'''
     # Start of initialization block
-    newapp = bno_imu.create_app('')
-    newapp.config['TESTING'] = True
+    newapp = app_module.app
     # END of initialization block
     yield newapp
     # any teardown or destruction code can go here after yield (same for other fixtures)
@@ -44,20 +47,10 @@ def test_basicapp_get(client):
     from the base URL of the app. In this case basicapp resource was created at 
     /basicapp. No localhost or ports needed'''
     log.info("Testing a get")
-    response = client.get("/bno_imu/42")
+    response = client.get("/sensors/imu")
     assert response.status_code == 200
 
 
-def test_basicapp_put(client):
-    '''Test adding a user'''
-    log.info("Adding user 34")
-    # In my experience, only json inputs worked with flask-restful. 
-    # I am likely wrong, but I don't have a working
-    # example for using other fields at the moment.
-    response = client.put("/bno_imu/99",json={"arg0" : "foo", "arg1" : "bar"})
-    assert response.status_code == 201
-
-    
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     # The function pytest.main() will run as if running pytest from command line

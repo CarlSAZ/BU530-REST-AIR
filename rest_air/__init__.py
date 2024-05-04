@@ -5,10 +5,13 @@ from flask_redis import FlaskRedis
 rdb = FlaskRedis()
 auth = HTTPBasicAuth()
 
-def create_app(configObject='config.DevConfig'):
+def create_app(config_object='config.DevConfig',*,custom_redis=None):
     app = APIFlask(__name__,instance_relative_config=False)
-    app.config.from_object(configObject)
+    app.config.from_object(config_object)
     
+    if custom_redis is not None:
+        rdb.from_custom_provider(custom_redis)
+
     with app.app_context():
         # Include routes if any
         from . import routes

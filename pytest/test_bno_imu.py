@@ -7,7 +7,8 @@ sys.path.append(parent)
 
 import logging
 import pytest
-import app as app_module
+from rest_air import create_app
+from fakeredis import FakeRedis
 
 log = logging.getLogger('Test.bno_imu')
 
@@ -24,7 +25,8 @@ log = logging.getLogger('Test.bno_imu')
 def fixture_app():
     '''Initializes the app'''
     # Start of initialization block
-    newapp = app_module.app
+    #newapp = create_app(config_object='config.PyTestConfig',custom_redis=FakeRedis())
+    newapp = create_app(config_object='config.TestConfig')
     # END of initialization block
     yield newapp
     # any teardown or destruction code can go here after yield (same for other fixtures)

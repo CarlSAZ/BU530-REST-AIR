@@ -9,8 +9,12 @@ class BaseConfig(object):
 
 class TestConfig(BaseConfig):
     DEVELOPMENT = True
-    DEBUG = True
+    DEBUG = False
     REDIS_URL = "redis://127.0.0.1:6379/0"
+
+class PyTestConfig(BaseConfig):
+    DEVELOPMENT = True
+    DEBUG = True
 
 
 class DevConfig(BaseConfig):

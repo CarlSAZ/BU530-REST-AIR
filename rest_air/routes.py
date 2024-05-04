@@ -2,7 +2,9 @@
 from apiflask import APIBlueprint, HTTPBasicAuth
 import Sensors.bno_imu as bno_imu
 
-auth = HTTPBasicAuth()
+# TODO: Find a better way than circular importing...
+from flask import current_app
+from rest_air import rdb, auth
     
 landing = APIBlueprint('landing',__name__,url_prefix='/')
 
@@ -29,7 +31,7 @@ def get_latest_imu():
         - gyro
         - quaternion
         - magnetic compass'''
-    result = bno_imu.load_latest_imu(ts)
+    result = bno_imu.load_latest_imu(rdb.ts())
     print(result)
     return result
 

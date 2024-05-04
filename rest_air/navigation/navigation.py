@@ -1,4 +1,4 @@
-from flask import Flask
+""" from flask import Flask
 from flask_restful import Resource, Api, abort, reqparse
 from marshmallow import Schema, fields
 from flask_sqlalchemy import SQLAlchemy
@@ -68,3 +68,4 @@ class Direction(Resource):
 class DirectionList(Resource):
     def get(self):
         return direction_steps
+ """

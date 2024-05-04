@@ -1,4 +1,4 @@
-'''This is a basic template for an API App that works with pytest'''
+""" '''This is a basic template for an API App that works with pytest'''
 from apiflask import APIFlask
 
 app = APIFlask(__name__, title='Basic Template')
@@ -37,3 +37,4 @@ class BasicApp(Resource):
 if __name__ == "__main__":
     Thisapp = create_app("")
     Thisapp.run(debug=True)
+ """

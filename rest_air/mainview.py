@@ -9,6 +9,7 @@ landing = APIBlueprint('landing',__name__,url_prefix='/')
 @auth.verify_password
 def verify_password(username,password):
     '''TBD: Better define authentication'''
+    print(f"Logging in as {username}, {password}")
     if(username=='admin' and password=='tacocat'):
         return username
 
@@ -20,9 +21,3 @@ def index():
 def list_sensors():
     return {''}
 
-
-
-@landing.route('/killswitch',methods=['GET','POST','PUT'])
-@landing.auth_required(auth)
-def send_killswitch_sig():
-    return {'message':'sent killswitch signal. '}

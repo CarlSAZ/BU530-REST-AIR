@@ -21,3 +21,4 @@ flask run
 ## Accessing the OpenAPI documentation
 
 Once the application is running, the endpoint of /docs will provide an interactive documentation of the various HTTP methods and input/output schemas
+i.e. http://127.0.0.1:500/docs

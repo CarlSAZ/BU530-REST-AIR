@@ -8,8 +8,9 @@ sys.path.append(parent)
 import logging
 import pytest
 from rest_air import create_app
+import base64
 
-log = logging.getLogger('Test.bno_imu')
+log = logging.getLogger('Test.commands')
 
 # fixtures work by defining steps to setup a required environment for
 # test functions. They can be called in the input arguments, and pytest
@@ -40,23 +41,28 @@ def fixture_runner(app):
     '''Not sure what a cli runner is yet, but this creates it...'''
     yield app.test_cli_runner()
 
-# For example, this function wants a client app to be passed in. Pytest will recognize
-# that we defined a fixture for this, and will call fixture_client to make it on the spot
-# for us (which will in turn call fixture_app). 
-def test_imu_base_get(client):
+@pytest.fixture(name='auth_header')
+def authenticate_client():
+    credentials = base64.b64encode(b"admin:tacocat")
+    yield {"Authorization": "Basic {}".format(credentials.decode('utf-8'))}
+    #yield {"httpCredentials": {"username": 'admin', "password":'tacocat'}}
+
+def test_command_killswitch_nologin(client):
     '''This tests the get function by sending a get request. The url is defined 
     from the base URL of the app. In this case basicapp resource was created at 
     /basicapp. No localhost or ports needed'''
-    log.info("Testing a get")
-    response = client.get("/sensors/imu")
+    log.info("Testing a killswitch put")
+    response = client.post("/command/killswitch")
+    assert response.status_code == 401
+
+def test_command_killswitch(client,auth_header):
+    '''This tests the get function by sending a get request. The url is defined 
+    from the base URL of the app. In this case basicapp resource was created at 
+    /basicapp. No localhost or ports needed'''
+    log.info("Testing a killswitch put")
+    response = client.post("/command/killswitch",headers=auth_header)
     assert response.status_code == 200
-
-def test_imu_timerange(client):
-    log.info("Testing a get")
-    response = client.get("/sensors/imu/12345-98765")
-    assert response.status_code == 501
-    assert response.data == b'Timerange not implemented yet. Requested time [12345 - 98765]'
-
+    
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     # The function pytest.main() will run as if running pytest from command line
@@ -65,3 +71,4 @@ if __name__ == "__main__":
     # passing __file__ as an argument will prevent pytest from running every single
     # test script in our working directory too
     pytest.main([__file__])
+

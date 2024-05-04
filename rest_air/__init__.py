@@ -20,4 +20,5 @@ def create_app(config_object='config.DevConfig',*,custom_redis=None):
         # Register blueprints
         app.register_blueprint(routes.landing)
         app.register_blueprint(routes.imupage)
+        app.register_blueprint(routes.commandview)
         return app

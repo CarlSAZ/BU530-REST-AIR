@@ -26,6 +26,7 @@
 			},
 			"python": {
 				"args": [
+					"--app 'rest_air:create_app(\"config.DevConfig\")'",
 					"run",
 					"--no-debugger",
 					"--no-reload",

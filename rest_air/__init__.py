@@ -16,4 +16,5 @@ def create_app(configObject='config.DevConfig'):
         rdb.init_app(app)
         # Register blueprints
         app.register_blueprint(routes.landing)
+        app.register_blueprint(routes.imupage)
         return app

@@ -10,6 +10,7 @@ class BaseConfig(object):
 class TestConfig(BaseConfig):
     DEVELOPMENT = True
     DEBUG = True
+    REDIS_URL = "redis://127.0.0.1:6379/0"
 
 
 class DevConfig(BaseConfig):

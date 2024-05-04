@@ -44,7 +44,7 @@ def fixture_runner(app):
 # For example, this function wants a client app to be passed in. Pytest will recognize
 # that we defined a fixture for this, and will call fixture_client to make it on the spot
 # for us (which will in turn call fixture_app). 
-def test_basicapp_get(client):
+def test_imu_base_get(client):
     '''This tests the get function by sending a get request. The url is defined 
     from the base URL of the app. In this case basicapp resource was created at 
     /basicapp. No localhost or ports needed'''
@@ -52,6 +52,11 @@ def test_basicapp_get(client):
     response = client.get("/sensors/imu")
     assert response.status_code == 200
 
+def test_imu_timerange(client):
+    log.info("Testing a get")
+    response = client.get("/sensors/imu/12345-98765")
+    assert response.status_code == 501
+    assert response.data == b'Timerange not implemented yet. Requested time [12345 - 98765]'
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)

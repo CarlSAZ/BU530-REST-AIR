@@ -1,4 +1,4 @@
-'''Unit tests for the basic app module that uses flask_restful'''
+""" '''Unit tests for the basic app module that uses flask_restful'''
 import logging
 import tracemalloc
 import pytest
@@ -66,3 +66,4 @@ if __name__ == "__main__":
     # passing __file__ as an argument will prevent pytest from running every single
     # test script in our working directory too
     pytest.main([__file__])
+ """

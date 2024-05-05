@@ -6,6 +6,8 @@ class BaseConfig(object):
                'email': "carl4ece@bu.edu"}
     LICENSE = {'name': 'Apache 2.0',
                'url': 'http://www.apache.org/licenses/LICENSE-2.0.html'}
+    SYNC_LOCAL_SPEC = True
+    LOCAL_SPEC_PATH = 'rest_air_openapi.json'
 
 class TestConfig(BaseConfig):
     DEVELOPMENT = True

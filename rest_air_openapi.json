@@ -1,0 +1,316 @@
+{
+  "components": {
+    "schemas": {
+      "HTTPError": {
+        "properties": {
+          "detail": {
+            "type": "object"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "imu_output": {
+        "properties": {
+          "accel_x": {},
+          "accel_y": {},
+          "accel_z": {},
+          "gyro_x": {},
+          "gyro_y": {},
+          "gyro_z": {},
+          "mag_x": {},
+          "mag_y": {},
+          "mag_z": {},
+          "quat_i": {},
+          "quat_j": {},
+          "quat_k": {},
+          "quat_real": {}
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "BasicAuth": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "carl4ece@bu.edu",
+      "name": "Carl Stevenson",
+      "url": "https://github.com/CarlSAZ/BU530-REST-AIR"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "title": "APIFlask",
+    "version": "0.1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/": {
+      "get": {
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Index",
+        "tags": [
+          "Landing"
+        ]
+      }
+    },
+    "/command/forwardspeed/{speed}": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "speed",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPError"
+                }
+              }
+            },
+            "description": "Authentication error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPError"
+                }
+              }
+            },
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ],
+        "summary": "Send Forward Speed",
+        "tags": [
+          "Command"
+        ]
+      }
+    },
+    "/command/hoverheight/{height}": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "height",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPError"
+                }
+              }
+            },
+            "description": "Authentication error"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPError"
+                }
+              }
+            },
+            "description": "Not found"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ],
+        "summary": "Send Hover Height",
+        "tags": [
+          "Command"
+        ]
+      }
+    },
+    "/command/killswitch": {
+      "post": {
+        "description": "This is the exception where the command is not queued, but\nsent immediately. This is a failsafe in case immediate shutdown is required.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPError"
+                }
+              }
+            },
+            "description": "Authentication error"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ],
+        "summary": "Immediately sends a kill signal.",
+        "tags": [
+          "Command"
+        ]
+      }
+    },
+    "/sensors": {
+      "get": {
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "List Sensors",
+        "tags": [
+          "Landing"
+        ]
+      }
+    },
+    "/sensors/imu": {
+      "get": {
+        "description": "- acceleration\n- gyro\n- quaternion\n- magnetic compass",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/imu_output"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Return latest IMU",
+        "tags": [
+          "Imu"
+        ]
+      }
+    },
+    "/sensors/imu/{time1}-{time2}": {
+      "get": {
+        "description": "- acceleration\n- gyro\n- quaternion\n- magnetic compass",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "time1",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "time2",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPError"
+                }
+              }
+            },
+            "description": "Not found"
+          }
+        },
+        "summary": "Returns the sensor data from the BNO imu between time1 and time2",
+        "tags": [
+          "Imu"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Landing"
+    },
+    {
+      "name": "Imu"
+    },
+    {
+      "name": "Command"
+    }
+  ]
+}

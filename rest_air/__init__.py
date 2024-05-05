@@ -6,7 +6,7 @@ rdb = FlaskRedis()
 auth = HTTPBasicAuth()
 
 def create_app(config_object='config.DevConfig',*,custom_redis=None):
-    app = APIFlask(__name__,instance_relative_config=False)
+    app = APIFlask(__name__,instance_relative_config=False,title='Rest AIR',version='0.0.5')
     app.config.from_object(config_object)
     
     if custom_redis is not None:

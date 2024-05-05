@@ -38,18 +38,23 @@
       }
     }
   },
+  "externalDocs": {
+    "description": "Find more info at the github here",
+    "url": "https://github.com/CarlSAZ/BU530-REST-AIR"
+  },
   "info": {
     "contact": {
       "email": "carl4ece@bu.edu",
       "name": "Carl Stevenson",
       "url": "https://github.com/CarlSAZ/BU530-REST-AIR"
     },
+    "description": "A simple API for interacting with a robot airship",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "title": "APIFlask",
-    "version": "0.1.0"
+    "title": "Rest AIR",
+    "version": "0.0.5"
   },
   "openapi": "3.0.3",
   "paths": {

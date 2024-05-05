@@ -2,7 +2,6 @@
 FROM python:3.11.5
 
 EXPOSE 5002
-EXPOSE 6379
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1

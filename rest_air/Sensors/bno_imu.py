@@ -44,6 +44,7 @@ def load_latest_imu(tsdb:redis.commands.timeseries.TimeSeries):
 @imupage.doc(summary='Return latest IMU')
 def get_latest_imu():
     '''Returns the latest sensor data from the BNO imu
+
         - acceleration
         - gyro
         - quaternion
@@ -53,8 +54,10 @@ def get_latest_imu():
     return result
 
 @imupage.get('/<int:time1>-<int:time2>')
+@imupage.doc(summary='Return IMU data within timerange')
 def get_imu_timerange(time1,time2):
     '''Returns the sensor data from the BNO imu between time1 and time2
+
         - acceleration
         - gyro
         - quaternion

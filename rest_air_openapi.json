@@ -74,6 +74,7 @@
     },
     "/command/forwardspeed/{speed}": {
       "post": {
+        "description": "Sets the forward speed to the new value",
         "parameters": [
           {
             "in": "path",
@@ -119,7 +120,7 @@
             "BasicAuth": []
           }
         ],
-        "summary": "Send Forward Speed",
+        "summary": "Set the forward speed",
         "tags": [
           "Command"
         ]
@@ -127,6 +128,7 @@
     },
     "/command/hoverheight/{height}": {
       "post": {
+        "description": "Hover height currently passed via the endpoint",
         "parameters": [
           {
             "in": "path",
@@ -172,7 +174,7 @@
             "BasicAuth": []
           }
         ],
-        "summary": "Send Hover Height",
+        "summary": "Sets the hover height",
         "tags": [
           "Command"
         ]
@@ -295,13 +297,18 @@
             "description": "Not found"
           }
         },
-        "summary": "Returns the sensor data from the BNO imu between time1 and time2",
+        "summary": "Return IMU data within timerange",
         "tags": [
           "Imu"
         ]
       }
     }
   },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000/"
+    }
+  ],
   "tags": [
     {
       "name": "Landing"

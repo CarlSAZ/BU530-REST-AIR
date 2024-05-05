@@ -54,6 +54,10 @@ def send_killswitch_sig():
 @commandview.post('/hoverheight/<float:height>')
 @commandview.auth_required(auth)
 def send_hover_height(height:float):
+    '''Sets the hover height
+
+    Hover height currently passed via the endpoint
+    '''
     command = AirshipParams()
     command.height_target_m = height
     command.header.stamp.sec = int(time.time())
@@ -68,6 +72,10 @@ def send_hover_height(height:float):
 @commandview.post('/forwardspeed/<float:speed>')
 @commandview.auth_required(auth)
 def send_forward_speed(speed:float):
+    '''Set the forward speed
+    
+    Sets the forward speed to the new value
+    '''
     # TODO: Replace with correct message
     command = AirshipParams()
     command.height_target_m = speed

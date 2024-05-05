@@ -46,7 +46,7 @@ class Journey(Resource):
         pass
 
     def delete(self):
-        """Stops the journey and deletes it"""
+        '''Stops the journey and deletes it'''
         pass
 
 direction_steps = []

@@ -11,7 +11,7 @@ Most of the documentation for the API is self documenting via OpenAPI specificat
 Once the application is running, the endpoint of /docs will provide an interactive documentation of the various HTTP methods and input/output schemas
 i.e. http://127.0.0.1:500/docs
 
-[Screenshot of OpenAPI self document](/docs/openapi_landing.png)
+![Screenshot of OpenAPI self document](/docs/openapi_landing.png)
 
 Alternatively, the following swaggerhub page is available to browse the API documentation. It is not garunteed to be in sync with development, and only 
 shows the latest API version. Accessing the openapi doc from a running instance is more reliable.
@@ -30,7 +30,7 @@ docker run -p 6379:6379 -it --rm --network redisnetwork --name airship-server re
 
 To test this server without the robot running, a few test scripts have been made to simulate inputs to the redis server. While the REDIS server is up and running, the python scripts under [simulator_scripts folder](/simulator_scripts) can be run to create entry data.
 
-[Example of getting simulated data](/docs/sensors_imu_get.png)
+![Example of getting simulated data](/docs/sensors_imu_get.png)
 
 ## How to start flask server
 

@@ -22,3 +22,8 @@ flask run
 
 Once the application is running, the endpoint of /docs will provide an interactive documentation of the various HTTP methods and input/output schemas
 i.e. http://127.0.0.1:500/docs
+
+Alternatively, the following swaggerhub page is available to browse the API documentation. It is not garunteed to be in sync with development, and only 
+shows the latest API version. Accessing the openapi doc from a running instance is more reliable.
+
+<https://app.swaggerhub.com/apis-docs/CarlStevenson-ed8/REST-AIR/0.1.0>
